@@ -1,5 +1,17 @@
 # ---
-# Apache
+# Apache Vhost file
+# It contains bash variables as follows
+# ---
+## SITE_PATH : the path to the DOCUMENT_ROOT parent directory. this must 
+##    contains a htdocs folder which becomes the DOCUMENT_ROOT
+##    also there should be a log folder in it
+## HOSTNAME : The FQDM of the server. 
+##    If you do not use DNS add this with the proper IP address 
+##    to your hosts file
+## USER_EMAIL
+##    an email address, what do you think?
+## USER_NAME
+##    the user_name of the linux user
 # ---
 
 # Open SSL
@@ -16,6 +28,16 @@ echo "
 	
 	DocumentRoot $SITE_PATH/htdocs/
 	Alias /phpmyadmin/ /usr/share/phpmyadmin/
+
+  <IfModule mod_fcgid.c>
+    suPHP_Engine on
+    SuexecUserGroup $USER_NAME $USER_NAME
+  </IfModule>
+    
+	
+	<IfModule mpm_itk_module>
+		AssignUserId $USER_NAME $USER_NAME
+	</IfModule>
 
 	<Directory />
 		Options FollowSymLinks
