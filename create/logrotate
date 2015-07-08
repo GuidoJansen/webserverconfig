@@ -1,0 +1,25 @@
+echo "
+$SITE_PATH/log/access.log {
+        weekly
+		maxsize 50M
+        missingok
+        rotate 12
+        su www-data www-data
+        create 600 www-data www-data
+        olddir old
+        nomail
+        compress
+        delaycompress
+}
+$SITE_PATH/log/error.log {
+        missingok
+        rotate 3
+        size 5M
+        su www-data www-data
+        create 600 www-data www-data
+        olddir old
+        nomail
+        dateformat %Y-%m-%d-%s
+        maxage 100
+}
+" > $LOGROTATE_FILE

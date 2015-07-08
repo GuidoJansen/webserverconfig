@@ -1,0 +1,16 @@
+# ----
+# SQL
+# ---
+
+#Creates user $USER_NAME with password
+mysql -p$ROOT_PASSWDSQL -e "CREATE USER '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWDSQL';"
+
+# creates databes $USER_NAME
+mysql -p$ROOT_PASSWDSQL -e "CREATE DATABASE $USER_NAME;"
+
+# changes user permission
+mysql -p$ROOT_PASSWDSQL -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,LOCK TABLES ON $USER_NAME.* TO '$USER_NAME'@'localhost';"
+
+echo "MySQL user $USER_NAME created."
+
+echo "--ok";
